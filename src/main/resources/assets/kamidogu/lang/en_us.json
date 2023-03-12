@@ -1,4 +1,6 @@
 {
   "item.kamidogu.zircon": "Zircon",
-  "item.kamidogu.raw_zircon": "Raw Zircon"
+  "item.kamidogu.raw_zircon": "Raw Zircon",
+
+  "itemGroup.kamidogutab": "Kamidogu"
 }
