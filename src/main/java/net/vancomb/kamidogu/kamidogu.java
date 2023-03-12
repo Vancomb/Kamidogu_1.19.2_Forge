@@ -17,6 +17,7 @@ public class kamidogu {
     public static final String MOD_ID = "kamidogu";
     private static final Logger LOGGER = LogUtils.getLogger();
 
+    // Very important
     public kamidogu() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
