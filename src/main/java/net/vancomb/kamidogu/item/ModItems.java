@@ -5,11 +5,13 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.ForgeTier;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import net.vancomb.kamidogu.entity.ModEntityTypes;
 import net.vancomb.kamidogu.kamidogu;
 
 public class ModItems {
@@ -21,6 +23,9 @@ public class ModItems {
     public static final RegistryObject<Item> RAW_ZIRCON = ITEMS.register("raw_zircon",
             () -> new Item(new Item.Properties().tab(ModCreativeTab.KAMIDOGU_TAB)));
 
+    public static final RegistryObject<Item> SUBZERO_SPAWN_EGG = ITEMS.register("subzero_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntityTypes.SUBZERO,  -1,  -1,
+                    new Item.Properties().tab(ModCreativeTab.KAMIDOGU_TAB)));
     //Sword
     public static final RegistryObject<SwordItem> DRAKESWORD = ITEMS.register("drakesword",
             () -> new SwordItem(Tiers.EXAMPLE, 0, 0, new Item.Properties().tab(ModCreativeTab.KAMIDOGU_TAB)));

@@ -1,6 +1,7 @@
 package net.vancomb.kamidogu;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -10,6 +11,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.vancomb.kamidogu.entity.ModEntityTypes;
+import net.vancomb.kamidogu.entity.client.SubzeroRenderer;
 import net.vancomb.kamidogu.item.ModItems;
 import org.slf4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
@@ -45,6 +47,8 @@ public class kamidogu {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
+
+            EntityRenderers.register(ModEntityTypes.SUBZERO.get(), SubzeroRenderer::new);
 
         }
     }
