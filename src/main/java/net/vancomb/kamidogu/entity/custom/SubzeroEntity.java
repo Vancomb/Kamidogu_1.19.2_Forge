@@ -35,7 +35,7 @@ public class SubzeroEntity extends Monster implements IAnimatable {
                 .add(Attributes.MAX_HEALTH, 20.0D)
                 .add(Attributes.ATTACK_DAMAGE, 3.0f)
                 .add(Attributes.ATTACK_SPEED, 1.0f)
-                .add(Attributes.MOVEMENT_SPEED, 0.4f).build();
+                .add(Attributes.MOVEMENT_SPEED, 0.2f).build();
     }
     @Override
     protected void registerGoals() {
@@ -57,7 +57,7 @@ public class SubzeroEntity extends Monster implements IAnimatable {
             return PlayState.CONTINUE;
         }
 
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("combat_idle", true));
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("tess", true));
         return PlayState.CONTINUE;
 
     }
@@ -65,7 +65,7 @@ public class SubzeroEntity extends Monster implements IAnimatable {
     private PlayState attackPredicate(AnimationEvent animationEvent) {
         if(this.swinging && animationEvent.getController().getAnimationState().equals(AnimationState.Stopped)) {
             animationEvent.getController().markNeedsReload();
-            animationEvent.getController().setAnimation(new AnimationBuilder().addAnimation("upper_cut", false));
+            animationEvent.getController().setAnimation(new AnimationBuilder().addAnimation("punch_right", false));
             this.swinging = false;
         }
 
@@ -88,3 +88,4 @@ public class SubzeroEntity extends Monster implements IAnimatable {
         return factory;
     }
 }
+
