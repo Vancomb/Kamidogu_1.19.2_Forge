@@ -14,6 +14,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -36,7 +37,6 @@ public class SubzeroEntity extends Monster implements IAnimatable {
                 .add(Attributes.ATTACK_SPEED, 1.0f)
                 .add(Attributes.MOVEMENT_SPEED, 0.4f).build();
     }
-
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new FloatGoal(this));
@@ -53,11 +53,22 @@ public class SubzeroEntity extends Monster implements IAnimatable {
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.walk_kombat", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("walk_kombat", true));
             return PlayState.CONTINUE;
         }
 
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.combat_idle", true));
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("combat_idle", true));
+        return PlayState.CONTINUE;
+
+    }
+
+    private PlayState attackPredicate(AnimationEvent animationEvent) {
+        if(this.swinging && animationEvent.getController().getAnimationState().equals(AnimationState.Stopped)) {
+            animationEvent.getController().markNeedsReload();
+            animationEvent.getController().setAnimation(new AnimationBuilder().addAnimation("upper_cut", false));
+            this.swinging = false;
+        }
+
         return PlayState.CONTINUE;
 
     }
@@ -66,6 +77,8 @@ public class SubzeroEntity extends Monster implements IAnimatable {
     public void registerControllers(AnimationData data) {
             data.addAnimationController(new AnimationController(this, "controller",
                     0, this::predicate));
+            data.addAnimationController(new AnimationController(this, "attackController",
+                    0, this::attackPredicate));
 
 
     }
